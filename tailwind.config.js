@@ -4,6 +4,10 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -49,6 +53,21 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			specter: {
+  				bg: 'hsl(var(--specter-bg))',
+  				surface: 'hsl(var(--specter-surface))',
+  				elevated: 'hsl(var(--specter-elevated))',
+  				border: 'hsl(var(--specter-border))',
+  				primary: 'hsl(var(--specter-primary))',
+  				bull: 'hsl(var(--specter-bull))',
+  				bear: 'hsl(var(--specter-bear))',
+  				caution: 'hsl(var(--specter-caution))',
+  				text: 'hsl(var(--specter-text))',
+  				muted: 'hsl(var(--specter-muted))',
+  				data: 'hsl(var(--specter-data))',
+  				purple: 'hsl(var(--specter-purple))',
+  				orange: 'hsl(var(--specter-orange))'
   			},
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',

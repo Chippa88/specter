@@ -1,0 +1,81 @@
+{
+  "name": "Analysis",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "type": "string"
+    },
+    "analysis_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "fundamentals_report": {
+      "type": "string"
+    },
+    "technical_report": {
+      "type": "string"
+    },
+    "sentiment_report": {
+      "type": "string"
+    },
+    "news_report": {
+      "type": "string"
+    },
+    "bull_case": {
+      "type": "string"
+    },
+    "bear_case": {
+      "type": "string"
+    },
+    "risk_score": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "final_verdict": {
+      "type": "string",
+      "enum": [
+        "Strong Buy",
+        "Buy",
+        "Hold",
+        "Avoid",
+        "Strong Avoid"
+      ]
+    },
+    "verdict_reasoning": {
+      "type": "string"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "bull_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "bear_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "data_sources": {
+      "type": "string"
+    },
+    "model_used": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ticker"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "write": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

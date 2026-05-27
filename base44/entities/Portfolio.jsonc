@@ -1,0 +1,69 @@
+{
+  "name": "Portfolio",
+  "type": "object",
+  "properties": {
+    "ticker": {
+      "type": "string"
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "stock",
+        "etf",
+        "futures",
+        "crypto"
+      ],
+      "default": "stock"
+    },
+    "position_type": {
+      "type": "string",
+      "enum": [
+        "long",
+        "short"
+      ],
+      "default": "long"
+    },
+    "entry_price": {
+      "type": "number"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "entry_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "closed"
+      ],
+      "default": "open"
+    },
+    "exit_price": {
+      "type": "number"
+    },
+    "exit_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "pnl": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "ticker"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "write": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}

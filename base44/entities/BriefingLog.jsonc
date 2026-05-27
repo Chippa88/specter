@@ -1,0 +1,45 @@
+{
+  "name": "BriefingLog",
+  "type": "object",
+  "properties": {
+    "briefing_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "tickers_analyzed": {
+      "type": "string"
+    },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "failed",
+        "pending"
+      ],
+      "default": "pending"
+    },
+    "telegram_delivered": {
+      "type": "boolean",
+      "default": false
+    },
+    "briefing_content": {
+      "type": "string"
+    },
+    "error_message": {
+      "type": "string"
+    },
+    "credits_used": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "write": {
+      "created_by_id": "{{user.id}}"
+    }
+  },
+  "required": []
+}
