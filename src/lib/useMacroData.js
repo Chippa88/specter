@@ -1,43 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { useQuery } from '@tanstack/react-query'
+import { base44 } from '@/api/base44Client'
 
 /**
- * useMacroData — fetches FRED macro data via the backend function.
- * Cached for 24 hours per app session.
- *
- * Returns React Query result. On missing_key, error.response.data.error === 'missing_key'.
+ * useMacroData — fetches macro market data via free Yahoo Finance API.
+ * Cached for 5 minutes.
  */
 export function useMacroData() {
   return useQuery({
     queryKey: ['macroData'],
     queryFn: async () => {
-      const res = await base44.functions.invoke('fetchMacroData', {});
-      // base44.functions.invoke returns an axios-like response
-      return res.data;
+      const data = await base44.functions.invoke('fetchMacroData', {})
+      return data
     },
-    staleTime: 24 * 60 * 60 * 1000, // 24h
-    gcTime: 24 * 60 * 60 * 1000,
-    retry: (failureCount, error) => {
-      // Don't retry on missing_key / 400s
-      const status = error?.response?.status;
-      if (status === 400 || status === 401) return false;
-      return failureCount < 1;
-    },
-  });
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+    retry: 1,
+  })
 }
 
-/**
- * Formats a FRED metric for display.
- *  - Fed Rate, 10y, Unemployment → percentage points
- *  - CPI → already a YoY percent
- */
 export function formatMacroValue(metric, val) {
-  if (val === null || val === undefined) return '—';
-  return `${val.toFixed(2)}%`;
+  if (val === null || val === undefined) return '\u2014'
+  return `${val.toFixed(2)}%`
 }
 
 export function macroDirection(latest, prior) {
-  if (latest == null || prior == null) return 0;
-  if (Math.abs(latest - prior) < 0.001) return 0;
-  return latest > prior ? 1 : -1;
+  if (latest == null || prior == null) return 0
+  if (Math.abs(latest - prior) < 0.001) return 0
+  return latest > prior ? 1 : -1
 }
