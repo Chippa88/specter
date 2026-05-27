@@ -1,39 +1,50 @@
-**Welcome to your Base44 project** 
+# Specter 👻
 
-**About**
+**7 AI analysts watch every ticker. One verdict. Total vision.**
 
-View and Edit  your app on [Base44.com](http://Base44.com) 
+Specter is an AI-powered market intelligence terminal that deploys seven specialized analyst agents on any stock, ETF, futures, or crypto ticker.
 
-This project contains everything you need to run your app locally.
+## Features
 
-**Edit the code in your local development environment**
+- **7 AI Analyst Agents** — Fundamentals, Technicals, Sentiment, News, Bull Case, Bear Case, Risk Manager
+- **Live Market Data** — Real-time prices via Yahoo Finance API
+- **Dashboard** — Analysis, Watchlist, Portfolio, Macro indicators, Daily Briefings
+- **Bring Your Own API Key** — No subscriptions required to start
+- **Standalone App** — Fully decoupled from Base44, runs on GitHub Pages
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+## Pricing
 
-**Prerequisites:** 
+| Plan | Price | Analyses | Agents | Extras |
+|------|-------|----------|--------|--------|
+| Free | $0/mo | 5/mo | 4 basic | — |
+| Starter | $29/mo | 50/mo | All 7 | Telegram briefings |
+| Pro | $59/mo | 200/mo | All 7 | Alpaca sync, PDF export |
+| Elite | $99/mo | Unlimited | All 7 | Priority, broker sync |
 
-1. Clone the repository using the project's Git URL 
-2. Navigate to the project directory
-3. Install dependencies: `npm install`
-4. Create an `.env.local` file and set the right environment variables
+## Quick Start
 
+```bash
+npm install
+npm run dev     # Development server
+npm run build   # Production build
 ```
-VITE_BASE44_APP_ID=your_app_id
-VITE_BASE44_APP_BASE_URL=your_backend_url
 
-e.g.
-VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
-VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.base44.app
+## Tech Stack
+
+- React 18 + Vite 6
+- Tailwind CSS 3
+- React Query (TanStack)
+- React Router
+- Radix UI primitives
+- Recharts
+- Framer Motion
+- Yahoo Finance API (free)
+
+## Deployment
+
+```bash
+npm run build
+npx gh-pages -d dist
 ```
 
-Run the app: `npm run dev`
-
-**Publish your changes**
-
-Open [Base44.com](http://Base44.com) and click on Publish.
-
-**Docs & Support**
-
-Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
-
-Support: [https://app.base44.com/support](https://app.base44.com/support)
+The app is deployed at: **https://chippa88.github.io/specter/**
