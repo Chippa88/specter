@@ -9,6 +9,7 @@ import Landing from '@/pages/Landing';
 import Pricing from '@/pages/Pricing';
 import Dashboard from '@/pages/Dashboard';
 import Settings from '@/pages/Settings';
+import AnalysisDetail from '@/pages/AnalysisDetail';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -40,6 +41,7 @@ const AuthenticatedApp = () => {
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/analysis/:id" element={<AnalysisDetail />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
