@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Specter 🎉</title>
+<style>
+:root{--bg:#0a0f0d;--surface:#111a14;--border:#1e2e22;--text:#f0fdf4;--muted:#6b7280;--accent:#4ade80;--accent-dark:#22c55e;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.6}
+.container{width:100%;max-width:560px;text-align:center}
+.success-icon{width:72px;height:72px;background:rgba(74,222,128,.1);border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.subtitle{color:var(--muted);font-size:16px;margin-bottom:32px;line-height:1.6}
+.steps{text-align:left;margin-bottom:32px}
+.step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{width:32px;height:32px;background:var(--accent);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-content h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.step-content p{color:var(--muted);font-size:13px}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit;margin:8px}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:24px;text-align:left;font-size:13px;color:var(--muted)}
+.card strong{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="success-icon">✓</div>
+<h1>You're in. Welcome to Specter.</h1>
+<p class="subtitle">Your 7-day free trial is active. No charges for 7 days.<br>Here's what to do next.</p>
+
+<div class="steps">
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-content">
+<h3>Enter your first ticker</h3>
+<p>Go to the dashboard and type any stock, ETF, crypto, or futures symbol. You'll get a full AI analyst briefing in minutes.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-content">
+<h3>Review the 7 agents' analysis</h3>
+<p>Fundamentals, technicals, sentiment, news, bull/bear cases, and risk score — all in one dark dashboard.</p>
+</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-content">
+<h3>Set up watchlist alerts</h3>
+<p>Free plan gets 3 watchlist tickers. Pro gets unlimited. Get notified when analysis changes.</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:24px">
+<a href="/" class="btn btn-primary">Open Dashboard →</a>
+<a href="/onboarding" class="btn btn-outline">Manage Billing</a>
+</div>
+
+<div class="card">
+<strong>💡 Free tier:</strong> 5 tickers/day, 3 agents, basic dashboard.<br>
+<strong>Pro ($29/mo):</strong> Unlimited tickers, all 7 agents, analytics, alerts.<br>
+<strong>Elite ($99/mo):</strong> Everything + API access + dedicated support.<br><br>
+Ready to upgrade anytime from your billing portal. Cancel anytime — no questions asked.
+</div>
+</div>
+</body>
+</html>

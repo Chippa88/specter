@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Plan — Specter</title>
+<style>
+:root{--bg:#0a0f0d;--surface:#111a14;--border:#1e2e22;--text:#f0fdf4;--muted:#6b7280;--accent:#4ade80;--accent-dark:#22c55e;--red:#f87171;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;padding:48px 24px;line-height:1.6}
+.container{max-width:900px;margin:0 auto}
+.header{text-align:center;margin-bottom:40px}
+.header h1{font-size:32px;font-weight:700;margin-bottom:8px}
+.header p{color:var(--muted);font-size:17px}
+.trial-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:20px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px}
+.plan{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;transition:all .2s;position:relative}
+.plan:hover{border-color:var(--accent)}
+.plan.popular{border-color:var(--accent);box-shadow:0 0 0 2px rgba(74,222,128,.15)}
+.plan.popular::after{content:'MOST POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--bg);padding:3px 14px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.plan-name{font-size:16px;font-weight:600;margin-bottom:4px}
+.plan-price{font-size:40px;font-weight:700;margin:12px 0 2px}
+.plan-price span{font-size:15px;color:var(--muted);font-weight:400}
+.plan-trial{color:var(--accent);font-size:13px;font-weight:600;min-height:20px;margin-bottom:12px}
+.plan-features{list-style:none;margin:20px 0;text-align:left}
+.plan-features li{padding:6px 0;font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px}
+.plan-features li::before{content:'✓';color:var(--accent);flex-shrink:0;font-weight:700}
+.btn{width:100%;padding:13px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:inherit}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:32px}
+.error{text-align:center;color:var(--red);padding:40px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<div class="trial-badge">🎉 7-day free trial • Cancel anytime • No risk</div>
+<h1>Choose your plan</h1>
+<p>Start free. Upgrade when you need more power.</p>
+</div>
+
+<div class="plans">
+<div class="plan">
+<div class="plan-name">Free</div>
+<div class="plan-price">$0<span>/forever</span></div>
+<div class="plan-trial">&nbsp;</div>
+<ul class="plan-features">
+<li>5 tickers per day</li>
+<li>3 AI agents</li>
+<li>Basic dashboard</li>
+<li>Community support</li>
+</ul>
+<button class="btn btn-outline" onclick="selectPlan('free')">Continue with Free</button>
+</div>
+
+<div class="plan popular">
+<div class="plan-name">Pro</div>
+<div class="plan-price">$29<span>/mo</span></div>
+<div class="plan-trial">7-day free trial</div>
+<ul class="plan-features">
+<li>Unlimited tickers</li>
+<li>All 7 AI agents</li>
+<li>Full dashboard + analytics</li>
+<li>Watchlist alerts</li>
+<li>Priority email support</li>
+</ul>
+<button class="btn btn-primary" onclick="selectPlan('pro')">Start Free Trial</button>
+</div>
+
+<div class="plan">
+<div class="plan-name">Elite</div>
+<div class="plan-price">$99<span>/mo</span></div>
+<div class="plan-trial">7-day free trial</div>
+<ul class="plan-features">
+<li>Everything in Pro</li>
+<li>API access</li>
+<li>Custom agent training</li>
+<li>Dedicated account manager</li>
+<li>White-glove onboarding</li>
+</ul>
+<button class="btn btn-outline" onclick="selectPlan('elite')">Start Free Trial</button>
+</div>
+</div>
+
+<div class="footer">
+<p>All paid plans include a 7-day free trial. Cancel anytime from your billing portal.</p>
+</div>
+</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@latest';
+
+const SUPABASE_URL = 'https://ccepbmjmlpwqtxzdoeha.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_7UKggNhqagkbA9ROJdHGQg_LNppjFCw';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const STRIPE_URLS = {
+  pro: 'https://checkout.stripe.com/c/pay/cs_live_b1UrNuq4f2WwHFaXkYCuhzIUIA2CciEN8IqOuIibrXRVr8ZMC2uokK4VUy',
+  elite: 'https://checkout.stripe.com/c/pay/cs_live_b17Vf04yC6xnq588nSWAg4qkNR9YOwH2MN2AwKm5dwRECPxxf8xn9eQ1Wb'
+};
+
+// Check auth on load
+async function checkAuth() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = '/signup';
+    return null;
+  }
+  return session;
+}
+
+async function selectPlan(plan) {
+  if (plan === 'free') {
+    // Skip payment, go straight to dashboard
+    window.location.href = '/';
+    return;
+  }
+  
+  // For paid plans, user must be logged in
+  const session = await checkAuth();
+  if (!session) return;
+  
+  // Redirect to Stripe checkout
+  const stripeUrl = STRIPE_URLS[plan];
+  if (stripeUrl) {
+    window.location.href = stripeUrl;
+  } else {
+    alert('Invalid plan selected');
+  }
+}
+</script>
+</body>
+</html>
